@@ -7,13 +7,13 @@ import java.util.List;
 
 @Repository
 public interface StudentMapper {
-    int deleteByPrimaryKey(byte[] uid);
+    int deleteByPrimaryKey(long uid);
 
     int insert(Student record);
 
     int insertSelective(Student record);
 
-    Student selectByPrimaryKey(byte[] uid);
+    Student selectByPrimaryKey(long uid);
 
     List<Student> selectByCondition(Student record);
 

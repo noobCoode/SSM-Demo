@@ -13,7 +13,7 @@ public class StudentService implements IStudentService {
     private StudentMapper studentMapper;
 
 
-    public int deleteByPrimaryKey(byte[] uid) {
+    public int deleteByPrimaryKey(long uid) {
         return studentMapper.deleteByPrimaryKey(uid);
     }
 
@@ -27,7 +27,7 @@ public class StudentService implements IStudentService {
     }
 
 
-    public Student selectByPrimaryKey(byte[] uid) {
+    public Student selectByPrimaryKey(long uid) {
         return studentMapper.selectByPrimaryKey(uid);
     }
 

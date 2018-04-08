@@ -12,24 +12,22 @@ import java.util.List;
 @RequestMapping("/api/Student")
 public class StudentController {
     @Autowired
-    private IStudentService service;
+    private IStudentService studentService;
 
-    @GetMapping("/get")
+    @GetMapping()
     public String get() {
-        List<Student> students = service.selectByCondition(new Student());
-        String jsonResult = com.alibaba.fastjson.JSON.toJSONString(students);
-        return jsonResult;
+        List<Student> students = studentService.selectByCondition(new Student());
+        return com.alibaba.fastjson.JSON.toJSONString(students);
     }
-   @PostMapping("/insert")
-    public String insertStudent(@RequestBody JSONObject request){
-        Student student=new Student();
+
+    @PostMapping()
+    public String insertStudent(@RequestBody JSONObject request) {
+        Student student = new Student();
         student.setName("xudongdong");
         student.setClassid(2);
         student.setAge(20);
-        student.setUid(new byte[1]);
-        service.insert(student);
-        String jsonResult = com.alibaba.fastjson.JSON.toJSONString(student);
-        return jsonResult;
+        studentService.insert(student);
+        return com.alibaba.fastjson.JSON.toJSONString(student);
     }
 
 }

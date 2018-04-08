@@ -1,7 +1,7 @@
 package Entity;
 
 public class Student {
-    private byte[] uid;
+    private long uid;
 
     private String name;
 
@@ -9,11 +9,11 @@ public class Student {
 
     private Integer classid;
 
-    public byte[] getUid() {
+    public long getUid() {
         return uid;
     }
 
-    public void setUid(byte[] uid) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 
