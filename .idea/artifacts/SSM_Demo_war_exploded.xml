@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="SSM_Demo:war exploded">
-    <output-path>$PROJECT_DIR$/target/Demo</output-path>
+    <output-path>$PROJECT_DIR$/target/SSM_Demo</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -43,10 +43,11 @@
           <element id="library" level="project" name="Maven: org.jetbrains:annotations-java5:16.0.1" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.3.0" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.3" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/Demo/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/SSM_Demo/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="SSM_Demo/web/Web" />
     </root>
