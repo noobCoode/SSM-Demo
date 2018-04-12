@@ -6,6 +6,7 @@ import Util.ResultSetUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSONObject;
 
@@ -24,14 +25,21 @@ public class StudentController {
     }
 
     @PostMapping()
-    public String insertStudent(@RequestBody JSONObject request) {
+    @ResponseBody
+    public JSONObject insertStudent(@RequestBody JSONObject request) {
         Student student = new Student();
-        student.setUid(request.getLong("uid"));
-        student.setClassid(request.getInteger("classid"));
-        student.setName(request.getString("name"));
-        student.setAge(request.getInteger("age"));
-        studentService.insert(student);
-        return JSON.toJSONString(student);
+        try{
+            student.setUid(request.getLong("uid"));
+            student.setClassid(request.getInteger("classid"));
+            student.setName(request.getString("name"));
+            student.setAge(request.getInteger("age"));
+            studentService.insert(student);
+            return ResultSetUtil.result("success",null);
+        }catch (DuplicateKeyException de){
+            return ResultSetUtil.result("fail","此学号已存在");
+        }catch (NullPointerException ne){
+            return ResultSetUtil.result("fail","传入的信息不完整");
+        }
     }
 
     @DeleteMapping()
@@ -40,14 +48,15 @@ public class StudentController {
         try{
             long uid=request.getLong("uid");
             studentService.deleteByPrimaryKey(uid);
-            return ResultSetUtil.result("success");
+            return ResultSetUtil.result("success",null);
         }catch (Exception e){
-            return ResultSetUtil.result("fail");
+            return ResultSetUtil.result("fail","未知原因");
         }
 
     }
 
     @PutMapping()
+    @ResponseBody
     public String updateStudnetByPrimaryKey(@RequestBody JSONObject request){
         Student student=new Student();
         student.setUid(request.getLong("uid"));
