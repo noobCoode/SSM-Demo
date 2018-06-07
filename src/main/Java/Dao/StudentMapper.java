@@ -1,6 +1,7 @@
 package Dao;
 
 import Entity.Student;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

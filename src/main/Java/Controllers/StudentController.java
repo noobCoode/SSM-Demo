@@ -2,7 +2,7 @@ package Controllers;
 
 import Entity.Student;
 import Service.IStudentService;
-import Util.ResultSetUtil;
+import Util.ResultPackage;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,31 +26,33 @@ public class StudentController {
 
     @PostMapping()
     @ResponseBody
-    public JSONObject insertStudent(@RequestBody JSONObject request) {
+    public ResultPackage insertStudent(@RequestBody JSONObject request) {
         Student student = new Student();
+        JSONObject res=new JSONObject();
         try{
             student.setUid(request.getLong("uid"));
             student.setClassid(request.getInteger("classid"));
             student.setName(request.getString("name"));
             student.setAge(request.getInteger("age"));
             studentService.insert(student);
-            return ResultSetUtil.result("success",null);
+            return ResultPackage.generateResult(0,"",res);
         }catch (DuplicateKeyException de){
-            return ResultSetUtil.result("fail","此学号已存在");
+            return ResultPackage.generateResult(-1,"主键重复",res);
         }catch (NullPointerException ne){
-            return ResultSetUtil.result("fail","传入的信息不完整");
+           return ResultPackage.generateResult(-2,"空指针异常",res);
         }
     }
 
     @DeleteMapping()
     @ResponseBody
-    public JSONObject deleteStudentByPrimaryKey(@RequestBody JSONObject request){
+    public ResultPackage deleteStudentByPrimaryKey(@RequestBody JSONObject request){
+        JSONObject res=new JSONObject();
         try{
             long uid=request.getLong("uid");
             studentService.deleteByPrimaryKey(uid);
-            return ResultSetUtil.result("success",null);
+            return ResultPackage.generateResult(0,"",res);
         }catch (Exception e){
-            return ResultSetUtil.result("fail","未知原因");
+            return ResultPackage.generateResult(-3,"未知",res);
         }
 
     }
