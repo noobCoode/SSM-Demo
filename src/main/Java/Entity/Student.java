@@ -1,7 +1,7 @@
 package Entity;
 
 public class Student {
-    private long uid;
+    private Long uid;
 
     private String name;
 
@@ -9,7 +9,7 @@ public class Student {
 
     private Integer classid;
 
-    public long getUid() {
+    public Long getUid() {
         return uid;
     }
 
